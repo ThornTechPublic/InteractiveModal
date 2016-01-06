@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,11 +17,55 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiM-RR-IfQ">
+                                <rect key="frame" x="258" y="285" width="84" height="30"/>
+                                <state key="normal" title="Open Modal"/>
+                                <connections>
+                                    <segue destination="rQI-mj-qHg" kind="presentation" id="xwa-Uj-pJD"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eiM-RR-IfQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aYc-4B-ufe"/>
+                            <constraint firstItem="eiM-RR-IfQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ubI-Yh-occ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Modal View Controller-->
+        <scene sceneID="vou-6E-o1c">
+            <objects>
+                <viewController id="rQI-mj-qHg" customClass="ModalViewController" customModule="InteractiveModal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xme-P2-tuR"/>
+                        <viewControllerLayoutGuide type="bottom" id="wev-Pm-RQc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gCC-mq-zjB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pS-11-m2j">
+                                <rect key="frame" x="528" y="42" width="39" height="30"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="close:" destination="rQI-mj-qHg" eventType="touchUpInside" id="446-pz-fXE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8pS-11-m2j" firstAttribute="top" secondItem="xme-P2-tuR" secondAttribute="bottom" constant="22" id="LdM-vJ-Wad"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8pS-11-m2j" secondAttribute="trailing" constant="13" id="gtQ-hM-abb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S3W-Pk-rQR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973" y="387"/>
         </scene>
     </scenes>
 </document>
