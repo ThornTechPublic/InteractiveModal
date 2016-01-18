@@ -57,13 +57,22 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="8pS-11-m2j" firstAttribute="top" secondItem="xme-P2-tuR" secondAttribute="bottom" constant="22" id="LdM-vJ-Wad"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8pS-11-m2j" secondAttribute="trailing" constant="13" id="gtQ-hM-abb"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Lkn-sC-s6x" appends="YES" id="oRm-hH-iU9"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3W-Pk-rQR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Lkn-sC-s6x">
+                    <connections>
+                        <action selector="handleGesture:" destination="rQI-mj-qHg" id="tEi-zJ-3bk"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="973" y="387"/>
         </scene>
