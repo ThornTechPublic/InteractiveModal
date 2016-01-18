@@ -49,4 +49,30 @@ class ModalViewController: UIViewController {
         }
     }
     
+    func showHelperCircle(){
+        let center = CGPoint(x: view.bounds.width * 0.5, y: 100)
+        let small = CGSize(width: 30, height: 30)
+        let circle = UIView(frame: CGRect(origin: center, size: small))
+        circle.layer.cornerRadius = circle.frame.width/2
+        circle.backgroundColor = UIColor.whiteColor()
+        circle.layer.shadowOpacity = 0.8
+        circle.layer.shadowOffset = CGSizeZero
+        view.addSubview(circle)
+        UIView.animateWithDuration(
+            0.5,
+            delay: 0.25,
+            options: [],
+            animations: {
+                circle.frame.origin.y += 200
+                circle.layer.opacity = 0
+            },
+            completion: { _ in
+                circle.removeFromSuperview()
+            }
+        )
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        showHelperCircle()
+    }
 }
