@@ -9,6 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationViewController = segue.destinationViewController as? ModalViewController {
+            destinationViewController.transitioningDelegate = self
+        }
+    }
 }
 
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissAnimator()
+    }
+}
