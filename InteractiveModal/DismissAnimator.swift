@@ -24,19 +24,30 @@ extension DismissAnimator : UIViewControllerAnimatedTransitioning {
             else {
                 return
         }
-        
+        // toVC is the Main View Controller
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
-
-        let screenBounds = UIScreen.mainScreen().bounds
-        let bottomLeftCorner = CGPoint(x: 0, y: screenBounds.height)
-        let finalFrame = CGRect(origin: bottomLeftCorner, size: screenBounds.size)
         
+        // fromVC is the Modal VC. 
+        // Hide it for now, since we're going to use snapshots instead.
+        fromVC.view.hidden = true
+        
+        // Create the snapshot.
+        let snapshot = fromVC.view.snapshotViewAfterScreenUpdates(false)
+        // Don't forget to add it
+        containerView.insertSubview(snapshot, aboveSubview: toVC.view)
+
         UIView.animateWithDuration(
             transitionDuration(transitionContext),
             animations: {
-                fromVC.view.frame = finalFrame
+                // Shift the snapshot down by one screen length
+                snapshot.center.y += UIScreen.mainScreen().bounds.height
             },
             completion: { _ in
+                // Cleanup. 
+                // Undo the hidden state. User won't see this because transition is already over.
+                fromVC.view.hidden = false
+                // It's already off-screen, but get rid of the snapshot anyway.
+                snapshot.removeFromSuperview()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
         )
