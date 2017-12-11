@@ -12,32 +12,31 @@ class DismissAnimator : NSObject {
 }
 
 extension DismissAnimator : UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.6
     }
-    
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard
-            let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
-            let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
-            let containerView = transitionContext.containerView()
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
+            let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
             else {
                 return
         }
         
-        containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
+        transitionContext.containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
 
-        let screenBounds = UIScreen.mainScreen().bounds
+        let screenBounds = UIScreen.main.bounds
         let bottomLeftCorner = CGPoint(x: 0, y: screenBounds.height)
         let finalFrame = CGRect(origin: bottomLeftCorner, size: screenBounds.size)
         
-        UIView.animateWithDuration(
-            transitionDuration(transitionContext),
+        UIView.animate(
+            withDuration: transitionDuration(using: transitionContext),
             animations: {
                 fromVC.view.frame = finalFrame
             },
             completion: { _ in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }
         )
     }
